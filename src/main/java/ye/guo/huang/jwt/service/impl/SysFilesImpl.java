@@ -2,11 +2,15 @@ package ye.guo.huang.jwt.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import ye.guo.huang.jwt.common.util.FileUtil;
 import ye.guo.huang.jwt.mapper.SysFilesMapper;
 import ye.guo.huang.jwt.pojo.SysFiles;
 import ye.guo.huang.jwt.service.SysFilesService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -14,6 +18,9 @@ public class SysFilesImpl implements SysFilesService {
 
     @Autowired
     private SysFilesMapper sysFilesMapper ;
+
+    @Value("${constant.filepath}")
+    private String filePath;
 
     /**
      * * 这个方法中用到了我们开头配置依赖的分页插件pagehelper
@@ -30,4 +37,15 @@ public class SysFilesImpl implements SysFilesService {
         PageHelper.startPage(pageNum, pageSize);
         return sysFilesMapper.selectAllFiles();
     }
+
+    @Override
+    public List<SysFiles> multifileUpload(List<MultipartFile> files) throws IOException {
+        List<SysFiles> sysFiles = FileUtil.multifileUpload( "file", filePath , files);
+        if( null == sysFiles){
+            return null;
+        }
+        return null;
+    }
+
+
 }

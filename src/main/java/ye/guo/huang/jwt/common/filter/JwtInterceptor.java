@@ -5,6 +5,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,6 +41,22 @@ public class JwtInterceptor implements HandlerInterceptor{
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
             LOGGER.info("preHandle");
+
+            //------------------------------------------------
+            HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+            httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("Origin"));
+            httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
+            httpServletResponse.setHeader("Access-Control-Allow-Headers", httpServletRequest.getHeader("Access-Control-Request-Headers"));
+            // 跨域时会首先发送一个option请求，这里我们给option请求直接返回正常状态
+            if (httpServletRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
+                httpServletResponse.setStatus(HttpStatus.OK.value());
+                return false;
+            }
+            //------------------------------------------------
+
+
+
             if(request.getRequestURI().endsWith(".json")){
                 //其他请求获取头信息
                 String authHeader = request.getHeader("token");

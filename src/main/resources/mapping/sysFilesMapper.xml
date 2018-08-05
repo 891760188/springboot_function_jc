@@ -21,6 +21,11 @@
     from sys_files
   </select>
 
+ <!-- <insert id="multifileUpload" parameterType="java.util.List" resultMap="BaseResultMap" >
+
+
+  </insert>-->
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

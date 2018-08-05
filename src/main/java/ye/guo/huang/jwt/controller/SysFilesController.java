@@ -12,12 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import ye.guo.huang.jwt.common.Page;
 import ye.guo.huang.jwt.common.ResponseBean;
+import ye.guo.huang.jwt.common.util.FileUtil;
 import ye.guo.huang.jwt.common.util.StringUtils;
 import ye.guo.huang.jwt.pojo.SysFiles;
 import ye.guo.huang.jwt.service.SysFilesService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 @RestController
@@ -50,37 +52,54 @@ public class SysFilesController {
      * @return
      */
     @RequestMapping(value="multifileUpload.file",method=RequestMethod.POST)
-    public @ResponseBody String multifileUpload(HttpServletRequest request){
+    public ResponseBean multifileUpload(HttpServletRequest request) throws IOException {
 
         List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("fileName");
 
         if(files.isEmpty()){
-            return "false";
+            return ResponseBean.response(null);
         }
+        List<SysFiles> sysFiles = FileUtil.multifileUpload( "file", filePath , files);
 
-        for(MultipartFile file:files){
-            String fileName = file.getOriginalFilename();
-            String phyName  = StringUtils.getUUid();
-            int size = (int) file.getSize();
-            LOGGER.info(fileName + "-->" + size);
+        return ResponseBean.response(sysFiles);
+    }
 
-            if(file.isEmpty()){
-                return "false";
-            }else{
-                File dest = new File(filePath + "/" + phyName);
-                if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
-                    dest.getParentFile().mkdir();
+    @RequestMapping("/download.file")
+    public String downLoad(HttpServletResponse response, String filename){
+        File file = new File(filePath + "/" + filename);
+        if(file.exists()){ //判断文件父目录是否存在
+            response.setContentType("application/force-download");
+            response.setHeader("Content-Disposition", "attachment;fileName=" + filename);
+
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null; //文件输入流
+            BufferedInputStream bis = null;
+
+            OutputStream os = null; //输出流
+            try {
+                os = response.getOutputStream();
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                int i = bis.read(buffer);
+                while(i != -1){
+                    os.write(buffer);
+                    i = bis.read(buffer);
                 }
-                try {
-                    file.transferTo(dest);
-                }catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return "false";
-                }
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            LOGGER.info("----------file download" + filename);
+            try {
+                bis.close();
+                fis.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
-        return "true";
+        return null;
     }
 
 }

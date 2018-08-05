@@ -11,6 +11,36 @@ public class SysFiles {
 
     private Integer status;
 
+    private Integer size;
+
+    private String suffix;
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
+
     private Date lastDate;
 
     private Date crtDate;
