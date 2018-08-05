@@ -1,17 +1,24 @@
 package ye.guo.huang.jwt.mapper;
 
-import ye.guo.huang.jwt.pojo.sysFiles;
+import org.springframework.stereotype.Repository;
+import ye.guo.huang.jwt.pojo.SysFiles;
 
-public interface sysFilesMapper {
+import java.util.List;
+
+@Repository
+public interface SysFilesMapper {
+
+    List<SysFiles> selectAllFiles();
+
     int deleteByPrimaryKey(Integer fileId);
 
-    int insert(sysFiles record);
+    int insert(SysFiles record);
 
-    int insertSelective(sysFiles record);
+    int insertSelective(SysFiles record);
 
-    sysFiles selectByPrimaryKey(Integer fileId);
+    SysFiles selectByPrimaryKey(Integer fileId);
 
-    int updateByPrimaryKeySelective(sysFiles record);
+    int updateByPrimaryKeySelective(SysFiles record);
 
-    int updateByPrimaryKey(sysFiles record);
+    int updateByPrimaryKey(SysFiles record);
 }

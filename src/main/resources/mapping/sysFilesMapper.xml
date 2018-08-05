@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="ye.guo.huang.jwt.mapper.sysFilesMapper" >
-  <resultMap id="BaseResultMap" type="ye.guo.huang.jwt.pojo.sysFiles" >
+<mapper namespace="ye.guo.huang.jwt.mapper.SysFilesMapper" >
+  <resultMap id="BaseResultMap" type="ye.guo.huang.jwt.pojo.SysFiles" >
     <id column="file_id" property="fileId" jdbcType="INTEGER" />
     <result column="orin_name" property="orinName" jdbcType="VARCHAR" />
     <result column="phy_name" property="phyName" jdbcType="VARCHAR" />
@@ -13,6 +13,14 @@
   <sql id="Base_Column_List" >
     file_id, orin_name, phy_name, status, last_date, crt_date, remark
   </sql>
+
+  <!--查询表的所有数据-->
+  <select id="selectAllFiles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_files
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -23,7 +31,7 @@
     delete from sys_files
     where file_id = #{fileId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="ye.guo.huang.jwt.pojo.sysFiles" >
+  <insert id="insert" parameterType="ye.guo.huang.jwt.pojo.SysFiles" >
     insert into sys_files (file_id, orin_name, phy_name, 
       status, last_date, crt_date, 
       remark)
@@ -31,7 +39,7 @@
       #{status,jdbcType=INTEGER}, #{lastDate,jdbcType=TIMESTAMP}, #{crtDate,jdbcType=TIMESTAMP}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="ye.guo.huang.jwt.pojo.sysFiles" >
+  <insert id="insertSelective" parameterType="ye.guo.huang.jwt.pojo.SysFiles" >
     insert into sys_files
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="fileId != null" >
@@ -80,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="ye.guo.huang.jwt.pojo.sysFiles" >
+  <update id="updateByPrimaryKeySelective" parameterType="ye.guo.huang.jwt.pojo.SysFiles" >
     update sys_files
     <set >
       <if test="orinName != null" >
@@ -104,7 +112,7 @@
     </set>
     where file_id = #{fileId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="ye.guo.huang.jwt.pojo.sysFiles" >
+  <update id="updateByPrimaryKey" parameterType="ye.guo.huang.jwt.pojo.SysFiles" >
     update sys_files
     set orin_name = #{orinName,jdbcType=VARCHAR},
       phy_name = #{phyName,jdbcType=VARCHAR},

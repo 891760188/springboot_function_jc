@@ -28,7 +28,7 @@ public class TokenScheduled {
      * 没五秒钟执行一次
      */
 //    @Scheduled(cron="0 */1 * * * ?")
-    @Scheduled(cron="*/50 * * * * ?")
+    @Scheduled(cron="*/5000 * * * * ?")
     public void executeFileDownLoadTask() {
 
         Thread current = Thread.currentThread();
@@ -50,7 +50,7 @@ public class TokenScheduled {
 
         }
 
-        LOGGER.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<任务编号current.getId()="+current.getId()+" 定时任务结束=" + DateUtils.formatDateToString(new Date(),DateUtils.DATE_FORMAT_FULL));
+//        LOGGER.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<任务编号current.getId()="+current.getId()+" 定时任务结束=" + DateUtils.formatDateToString(new Date(),DateUtils.DATE_FORMAT_FULL));
 
     }
 

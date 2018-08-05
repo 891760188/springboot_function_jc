@@ -20,6 +20,10 @@ public class ResponseBean {
     // 返回的数据
     private Object data;
 
+    public static ResponseBean response(Object data){
+        return new ResponseBean(data);
+    }
+
     public ResponseBean(int code, String msg, Object data) {
         this.code = code;
         this.msg = msg;

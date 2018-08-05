@@ -2,7 +2,7 @@ package ye.guo.huang.jwt.pojo;
 
 import java.util.Date;
 
-public class sysFiles {
+public class SysFiles {
     private Integer fileId;
 
     private String orinName;
