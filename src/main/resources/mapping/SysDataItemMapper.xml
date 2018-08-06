@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ye.guo.huang.jwt.mapper.SysDataItemMapper" >
+  <resultMap id="BaseResultMap" type="ye.guo.huang.jwt.pojo.SysDataItem" >
+    <id column="cd_val_id" property="cdValId" jdbcType="INTEGER" />
+    <result column="cd_val_name" property="cdValName" jdbcType="VARCHAR" />
+    <result column="cd_id" property="cdId" jdbcType="INTEGER" />
+    <result column="cd_name" property="cdName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="last_date" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="crt_psn" property="crtPsn" jdbcType="VARCHAR" />
+    <result column="up_psn" property="upPsn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cd_val_id, cd_val_name, cd_id, cd_name, status, last_date, crt_date, remark, crt_psn, 
+    up_psn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_data_item
+    where cd_val_id = #{cdValId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_data_item
+    where cd_val_id = #{cdValId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ye.guo.huang.jwt.pojo.SysDataItem" >
+    insert into sys_data_item (cd_val_id, cd_val_name, cd_id, 
+      cd_name, status, last_date, 
+      crt_date, remark, crt_psn, 
+      up_psn)
+    values (#{cdValId,jdbcType=INTEGER}, #{cdValName,jdbcType=VARCHAR}, #{cdId,jdbcType=INTEGER}, 
+      #{cdName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{lastDate,jdbcType=TIMESTAMP}, 
+      #{crtDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{crtPsn,jdbcType=VARCHAR}, 
+      #{upPsn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ye.guo.huang.jwt.pojo.SysDataItem" >
+    insert into sys_data_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cdValId != null" >
+        cd_val_id,
+      </if>
+      <if test="cdValName != null" >
+        cd_val_name,
+      </if>
+      <if test="cdId != null" >
+        cd_id,
+      </if>
+      <if test="cdName != null" >
+        cd_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastDate != null" >
+        last_date,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="crtPsn != null" >
+        crt_psn,
+      </if>
+      <if test="upPsn != null" >
+        up_psn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cdValId != null" >
+        #{cdValId,jdbcType=INTEGER},
+      </if>
+      <if test="cdValName != null" >
+        #{cdValName,jdbcType=VARCHAR},
+      </if>
+      <if test="cdId != null" >
+        #{cdId,jdbcType=INTEGER},
+      </if>
+      <if test="cdName != null" >
+        #{cdName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="crtPsn != null" >
+        #{crtPsn,jdbcType=VARCHAR},
+      </if>
+      <if test="upPsn != null" >
+        #{upPsn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ye.guo.huang.jwt.pojo.SysDataItem" >
+    update sys_data_item
+    <set >
+      <if test="cdValName != null" >
+        cd_val_name = #{cdValName,jdbcType=VARCHAR},
+      </if>
+      <if test="cdId != null" >
+        cd_id = #{cdId,jdbcType=INTEGER},
+      </if>
+      <if test="cdName != null" >
+        cd_name = #{cdName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastDate != null" >
+        last_date = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="crtPsn != null" >
+        crt_psn = #{crtPsn,jdbcType=VARCHAR},
+      </if>
+      <if test="upPsn != null" >
+        up_psn = #{upPsn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cd_val_id = #{cdValId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ye.guo.huang.jwt.pojo.SysDataItem" >
+    update sys_data_item
+    set cd_val_name = #{cdValName,jdbcType=VARCHAR},
+      cd_id = #{cdId,jdbcType=INTEGER},
+      cd_name = #{cdName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      last_date = #{lastDate,jdbcType=TIMESTAMP},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      crt_psn = #{crtPsn,jdbcType=VARCHAR},
+      up_psn = #{upPsn,jdbcType=VARCHAR}
+    where cd_val_id = #{cdValId,jdbcType=INTEGER}
+  </update>
+</mapper>
