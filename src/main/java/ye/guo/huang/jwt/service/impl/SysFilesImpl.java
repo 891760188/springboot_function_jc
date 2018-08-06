@@ -1,11 +1,15 @@
 package ye.guo.huang.jwt.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ye.guo.huang.jwt.common.util.FileUtil;
+import ye.guo.huang.jwt.controller.SysFilesController;
 import ye.guo.huang.jwt.mapper.SysFilesMapper;
 import ye.guo.huang.jwt.pojo.SysFiles;
 import ye.guo.huang.jwt.service.SysFilesService;
@@ -15,6 +19,8 @@ import java.util.List;
 
 @Service
 public class SysFilesImpl implements SysFilesService {
+
+    private static final Logger LOGGER = LogManager.getLogger(SysFilesImpl.class);
 
     @Autowired
     private SysFilesMapper sysFilesMapper ;
@@ -39,12 +45,20 @@ public class SysFilesImpl implements SysFilesService {
     }
 
     @Override
+    @Transactional
     public List<SysFiles> multifileUpload(List<MultipartFile> files) throws IOException {
         List<SysFiles> sysFiles = FileUtil.multifileUpload( "file", filePath , files);
         if( null == sysFiles){
             return null;
         }
-        return null;
+        int size = sysFilesMapper.multifileUpload(sysFiles);
+        LOGGER.info("文件上传个数："+sysFiles.size()+"======="+size);
+        return sysFiles;
+    }
+
+    @Override
+    public int downloadTimePlus(String filename) {
+        return sysFilesMapper.downloadTimePlus(filename);
     }
 
 

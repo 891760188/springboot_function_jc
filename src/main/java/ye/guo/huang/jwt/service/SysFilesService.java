@@ -13,4 +13,6 @@ public interface SysFilesService {
 
     List<SysFiles> multifileUpload(List<MultipartFile> files) throws IOException;
 
+    int downloadTimePlus(String filename);
+
 }

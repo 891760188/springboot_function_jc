@@ -1,7 +1,6 @@
 package ye.guo.huang.jwt.mapper;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 import ye.guo.huang.jwt.pojo.SysFiles;
 
 import java.util.List;
@@ -11,7 +10,9 @@ public interface SysFilesMapper {
 
     List<SysFiles> selectAllFiles();
 
-    List<SysFiles> multifileUpload(List<MultipartFile> files);
+    int multifileUpload(List<SysFiles> files);
+
+    int downloadTimePlus(String filename);
 
     int deleteByPrimaryKey(Integer fileId);
 

@@ -6,12 +6,20 @@
     <result column="orin_name" property="orinName" jdbcType="VARCHAR" />
     <result column="phy_name" property="phyName" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="down_time" property="downTime" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="suffix" property="suffix" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="last_date" property="lastDate" jdbcType="TIMESTAMP" />
     <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+
+
+
+
   </resultMap>
   <sql id="Base_Column_List" >
-    file_id, orin_name, phy_name, status, last_date, crt_date, remark
+    file_id, orin_name, phy_name, status,down_time,size,suffix, type ,last_date, crt_date, remark
   </sql>
 
   <!--查询表的所有数据-->
@@ -21,10 +29,30 @@
     from sys_files
   </select>
 
- <!-- <insert id="multifileUpload" parameterType="java.util.List" resultMap="BaseResultMap" >
+ <insert id="multifileUpload" parameterType="java.util.List"  >
+     insert into sys_files ( orin_name, phy_name,size,suffix,type,down_time,
+      status,
+      remark)
+      values
 
+     <foreach collection ="list" item="file" index= "index" separator =",">
+          (
+          #{file.orinName},
+          #{file.phyName},
+          #{file.size},
+          #{file.suffix},
+          #{file.type},
+          #{file.downTime},
+          #{file.status},
+          #{file.remark}
+          )
+      </foreach >
 
-  </insert>-->
+  </insert>
+
+  <update id="downloadTimePlus" parameterType="java.lang.String">
+      update  sys_files a set a.down_time = a.down_time + 1 where a.phy_name =  #{filename}
+  </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

@@ -59,47 +59,20 @@ public class SysFilesController {
         if(files.isEmpty()){
             return ResponseBean.response(null);
         }
-        List<SysFiles> sysFiles = FileUtil.multifileUpload( "file", filePath , files);
+        List<SysFiles> sysFiles = sysFilesService.multifileUpload(files);
+//        List<SysFiles> sysFiles = FileUtil.multifileUpload( "file", filePath , files);
 
         return ResponseBean.response(sysFiles);
     }
 
     @RequestMapping("/download.file")
-    public String downLoad(HttpServletResponse response, String filename){
-        File file = new File(filePath + "/" + filename);
-        if(file.exists()){ //判断文件父目录是否存在
-            response.setContentType("application/force-download");
-            response.setHeader("Content-Disposition", "attachment;fileName=" + filename);
+    public ResponseBean downLoad(HttpServletResponse response, String filename) throws IOException {
 
-            byte[] buffer = new byte[1024];
-            FileInputStream fis = null; //文件输入流
-            BufferedInputStream bis = null;
-
-            OutputStream os = null; //输出流
-            try {
-                os = response.getOutputStream();
-                fis = new FileInputStream(file);
-                bis = new BufferedInputStream(fis);
-                int i = bis.read(buffer);
-                while(i != -1){
-                    os.write(buffer);
-                    i = bis.read(buffer);
-                }
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            LOGGER.info("----------file download" + filename);
-            try {
-                bis.close();
-                fis.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        boolean downFlag = FileUtil.downLoad( response, filename ,  filePath);
+        if(downFlag){
+            int tmes = sysFilesService.downloadTimePlus(filename);
         }
-        return null;
+        return ResponseBean.response("");
     }
 
 }

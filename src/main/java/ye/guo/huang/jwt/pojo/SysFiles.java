@@ -13,8 +13,26 @@ public class SysFiles {
 
     private Integer size;
 
+    private Integer downTime;
+
     private String suffix;
 
+    private String type;
+
+    private Date lastDate;
+
+    private Date crtDate;
+
+    private String remark;
+
+
+    public Integer getDownTime() {
+        return downTime;
+    }
+
+    public void setDownTime(Integer downTime) {
+        this.downTime = downTime;
+    }
     public Integer getSize() {
         return size;
     }
@@ -39,13 +57,7 @@ public class SysFiles {
         this.type = type;
     }
 
-    private String type;
 
-    private Date lastDate;
-
-    private Date crtDate;
-
-    private String remark;
 
     public Integer getFileId() {
         return fileId;
