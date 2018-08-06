@@ -10,6 +10,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *  文件上传下载工具类
+ * @author 448249687@qq.com
+ * @Date 2018/8/6
+ *
+ */
+
 public class FileUtil {
 
     private static final Logger LOGGER = LogManager.getLogger(FileUtil.class);
