@@ -1,5 +1,10 @@
 package ye.guo.huang.jwt.controller;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ye.guo.huang.jwt.common.ResponseBean;
 import ye.guo.huang.jwt.pojo.UUser;
 import ye.guo.huang.jwt.service.UUserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -44,5 +52,36 @@ public class UUserController {
         String jwt = uUserService.findByNicknameAndPswd(uUser.getNickname(),uUser.getPswd());
         return new ResponseBean(jwt);
     }
+
+    // 下载pdf文档
+//    @RequestMapping("/downloadPdf.file")
+//    public void download(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        // 告诉浏览器用什么软件可以打开此文件
+//        response.setHeader("content-Type", "application/pdf");
+//        // 下载文件的默认名称
+//        response.setHeader("Content-Disposition", "attachment;filename=user.pdf");
+//
+//        Document document = new Document();
+//        PdfWriter.getInstance(document, response.getOutputStream());
+//        document.open();
+//        for (int i = 0 ; i < 4 ; i++) {
+//            PdfPTable table = new PdfPTable(3);
+//            PdfPCell cell = new PdfPCell();
+//            cell.setPhrase(new Paragraph("id"));
+//            table.addCell(cell);
+//            document.add(table);
+//
+//            cell = new PdfPCell();
+//            cell.setPhrase(new Paragraph("名字555"));
+//            table.addCell(cell);
+//            document.add(table);
+//
+//            cell = new PdfPCell();
+//            cell.setPhrase(new Paragraph("age"));
+//            table.addCell(cell);
+//            document.add(table);
+//        }
+//        document.close();
+//    }
 
 }
