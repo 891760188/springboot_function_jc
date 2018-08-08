@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ye.guo.huang.jwt.mapper.CustInfoMapper" >
+  <resultMap id="BaseResultMap" type="ye.guo.huang.jwt.pojo.CustInfo" >
+    <id column="cust_id" property="custId" jdbcType="INTEGER" />
+    <result column="cust_name" property="custName" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="work" property="work" jdbcType="VARCHAR" />
+    <result column="last_date" property="lastDate" jdbcType="TIMESTAMP" />
+    <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
+    <result column="crt_user" property="crtUser" jdbcType="VARCHAR" />
+    <result column="up_user" property="upUser" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cust_id, cust_name, birthday, phone, sex, address, email, work, last_date, crt_date, 
+    crt_user, up_user, remark
+  </sql>
+
+  <!--批量插入-->
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into cust_info ( cust_name, birthday,
+      phone, sex, address,
+      email, work,
+      remark)
+    values
+
+    <foreach collection ="list" item="item" index= "index" separator =",">
+      ( #{item.custName,jdbcType=VARCHAR}, #{item.birthday,jdbcType=TIMESTAMP},
+      #{item.phone,jdbcType=VARCHAR}, #{item.sex,jdbcType=INTEGER}, #{item.address,jdbcType=VARCHAR},
+      #{item.email,jdbcType=VARCHAR}, #{item.work,jdbcType=VARCHAR},
+      #{item.remark,jdbcType=VARCHAR})
+    </foreach >
+  </insert>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cust_info
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cust_info
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ye.guo.huang.jwt.pojo.CustInfo" >
+    insert into cust_info (cust_id, cust_name, birthday, 
+      phone, sex, address, 
+      email, work, last_date, 
+      crt_date, crt_user, up_user, 
+      remark)
+    values (#{custId,jdbcType=INTEGER}, #{custName,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP}, 
+      #{crtDate,jdbcType=TIMESTAMP}, #{crtUser,jdbcType=VARCHAR}, #{upUser,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ye.guo.huang.jwt.pojo.CustInfo" >
+    insert into cust_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        cust_id,
+      </if>
+      <if test="custName != null" >
+        cust_name,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="work != null" >
+        work,
+      </if>
+      <if test="lastDate != null" >
+        last_date,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="crtUser != null" >
+        crt_user,
+      </if>
+      <if test="upUser != null" >
+        up_user,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custId != null" >
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null" >
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtUser != null" >
+        #{crtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="upUser != null" >
+        #{upUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ye.guo.huang.jwt.pojo.CustInfo" >
+    update cust_info
+    <set >
+      <if test="custName != null" >
+        cust_name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null" >
+        work = #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        last_date = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtUser != null" >
+        crt_user = #{crtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="upUser != null" >
+        up_user = #{upUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ye.guo.huang.jwt.pojo.CustInfo" >
+    update cust_info
+    set cust_name = #{custName,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      phone = #{phone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      work = #{work,jdbcType=VARCHAR},
+      last_date = #{lastDate,jdbcType=TIMESTAMP},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      crt_user = #{crtUser,jdbcType=VARCHAR},
+      up_user = #{upUser,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+</mapper>

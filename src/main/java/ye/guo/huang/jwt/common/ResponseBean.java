@@ -23,6 +23,9 @@ public class ResponseBean {
     public static ResponseBean response(Object data){
         return new ResponseBean(data);
     }
+    public static ResponseBean responseErr(String msg){
+        return new ResponseBean( 500,  msg, null);
+    }
 
     public ResponseBean(int code, String msg, Object data) {
         this.code = code;
