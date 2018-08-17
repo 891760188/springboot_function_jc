@@ -49,6 +49,7 @@ public class UUserController {
 
     @PostMapping("/login.do")
     public  ResponseBean login(UUser uUser){
+        LOGGER.info(1);
         String jwt = uUserService.findByNicknameAndPswd(uUser.getNickname(),uUser.getPswd());
         return new ResponseBean(jwt);
     }

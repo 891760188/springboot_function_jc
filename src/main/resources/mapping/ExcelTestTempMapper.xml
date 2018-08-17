@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ye.guo.huang.jwt.mapper.ExcelTestTempMapper" >
+  <resultMap id="BaseResultMap" type="ye.guo.huang.jwt.pojo.ExcelTestTemp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="card" property="card" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, card, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from excel_test_temp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <!--查出有问题数据-->
+  <select id="selectErrList" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from excel_test_temp a
+    where a.remark is not null
+  </select>
+    <!--全表删除-->
+  <delete id="deleteAll"  >
+    delete from excel_test_temp
+  </delete>
+    <!--写入有问题数据的问题所在-->
+    <update id="updateErrMsg" >
+      update  excel_test_temp a set a.remark =  CONCAT(a.`name`,"已经存在") where 1=1 and
+        EXISTS (select 1 from excel_test b where b.card = a.card)
+    </update>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from excel_test_temp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="ye.guo.huang.jwt.pojo.ExcelTestTemp" >
+    insert into excel_test_temp (id, name, card,
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <!--批量插入-->
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into excel_test_temp (name, card)
+    values
+    <foreach collection ="list" item="item" index= "index" separator =",">
+        (
+            #{item.name,jdbcType=VARCHAR},
+            #{item.card,jdbcType=VARCHAR}
+        )
+    </foreach >
+  </insert>
+
+  <insert id="insertSelective" parameterType="ye.guo.huang.jwt.pojo.ExcelTestTemp" >
+    insert into excel_test_temp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ye.guo.huang.jwt.pojo.ExcelTestTemp" >
+    update excel_test_temp
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ye.guo.huang.jwt.pojo.ExcelTestTemp" >
+    update excel_test_temp
+    set name = #{name,jdbcType=VARCHAR},
+      card = #{card,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

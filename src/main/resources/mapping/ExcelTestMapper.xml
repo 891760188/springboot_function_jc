@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ye.guo.huang.jwt.mapper.ExcelTestMapper" >
+  <resultMap id="BaseResultMap" type="ye.guo.huang.jwt.pojo.ExcelTest" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="card" property="card" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, card
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from excel_test
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--根据对象条件查询数据-->
+  <select id="selectByExcelTest" resultMap="BaseResultMap" parameterType="ye.guo.huang.jwt.pojo.ExcelTest" >
+    select
+    <include refid="Base_Column_List" />
+    from excel_test
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from excel_test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <!--从临时表把合法数据放到数据表-->
+  <insert id="insertCheck"  >
+      insert into excel_test  ( name, card )
+      SELECT a.`name` name, a.card card from excel_test_temp a where a.remark is null
+  </insert>
+
+<!--批量插入-->
+  <insert id="insertBatch" parameterType="java.util.List" >
+      insert into excel_test (name, card)
+      values
+      <foreach collection ="list" item="item" index= "index" separator =",">
+          (
+          #{item.name,jdbcType=VARCHAR},
+          #{item.card,jdbcType=VARCHAR}
+          )
+      </foreach >
+  </insert>
+    <insert id="insert" parameterType="ye.guo.huang.jwt.pojo.ExcelTest" >
+    insert into excel_test (id, name, card
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ye.guo.huang.jwt.pojo.ExcelTest" >
+    insert into excel_test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ye.guo.huang.jwt.pojo.ExcelTest" >
+    update excel_test
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ye.guo.huang.jwt.pojo.ExcelTest" >
+    update excel_test
+    set name = #{name,jdbcType=VARCHAR},
+      card = #{card,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

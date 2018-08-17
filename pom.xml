@@ -127,6 +127,13 @@
             <version>RELEASE</version>
         </dependency>
 
+        <!--添加freeMarker word-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.20</version>
+        </dependency>
+
         <!-- devtools插件，热部署 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
