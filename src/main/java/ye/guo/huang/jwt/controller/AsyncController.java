@@ -25,7 +25,7 @@ public class AsyncController {
     private AsyncService asyncService ;
 
     @RequestMapping("/async.async")
-    public ResponseBean executeAsync(){
+    public ResponseBean executeAsync(String q){
        asyncService.executeAsync();
         return ResponseBean.response(true);
     }
