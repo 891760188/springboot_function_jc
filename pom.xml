@@ -133,6 +133,12 @@
             <artifactId>freemarker</artifactId>
             <version>2.3.20</version>
         </dependency>
+        <!--rabbitMQ-->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>3.6.5</version>
+        </dependency>
 
         <!-- devtools插件，热部署 -->
         <dependency>

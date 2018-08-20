@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 /**
  * web访问切面，统计request耗时长度
- * @author ibm
+ * @author 448249687@qq.com
  * @since 0
  * @date 2018/8/18
  */

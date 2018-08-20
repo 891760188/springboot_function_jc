@@ -1,5 +1,7 @@
 package ye.guo.huang.jwt.common;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import ye.guo.huang.jwt.common.enums.HttpStatusEnum;
 
 /**
@@ -10,6 +12,8 @@ import ye.guo.huang.jwt.common.enums.HttpStatusEnum;
  */
 
 public class ResponseBean {
+
+    private static final Logger LOGGER = LogManager.getLogger(ResponseBean.class);
 
     // http 状态码 HttpStatusEnum
     private int code;
