@@ -39,9 +39,9 @@ spring:
   jackson:
     date-format : yyyy-MM-dd HH:mm:ss
     time-zone : GMT+8
-  devtools:  #添加那个目录的文件需要restart
-    restart:
-      additional-paths: src/main/java
+#  devtools:  #添加那个目录的文件需要restart
+#    restart:
+#      additional-paths: src/main/java
 
 ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
 mybatis:

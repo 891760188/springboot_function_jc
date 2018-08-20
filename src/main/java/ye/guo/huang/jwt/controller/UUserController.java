@@ -5,6 +5,9 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date 2018/8/4
  *
  */
-
+@Api(value="用户管理",tags={"用户管理-apis"})
 @RestController
 @RequestMapping("/api/user")
 public class UUserController {
@@ -35,6 +38,8 @@ public class UUserController {
     @Autowired
     private UUserService uUserService ;
 
+    @ApiOperation(value="获取用户列表", notes="获取用户列表")
+    @ApiImplicitParam(paramType="query",name = "page", value = "分页对象", required = false ,dataType="page")
     @GetMapping("/findAll.json")
     public ResponseBean findAll() {
 
