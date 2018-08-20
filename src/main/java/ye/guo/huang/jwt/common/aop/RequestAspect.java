@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import org.springframework.stereotype.Component;
+import ye.guo.huang.jwt.common.util.JacksonUtil;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -50,7 +51,8 @@ public class RequestAspect {
 
         StringBuilder restInfo = new StringBuilder(targetMethod.getDeclaringClass().getName() + ".");//请求的类名
         restInfo.append(targetMethod.getName());//请求的控制层的方法名
-        restInfo.append("(" + Arrays.toString(targetArgs) + ")");//请求参数
+        restInfo.append("---请求参数targetArgs=(" + JacksonUtil.toJson(targetArgs) + ")");//请求参数
+        restInfo.append("---返回结果restResult=(" + JacksonUtil.toJson(restResult) + ")");//返回结果
         restInfo.append(" 耗时 ：");
         restInfo.append(duration);
         restInfo.append("毫秒");
