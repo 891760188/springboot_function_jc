@@ -37,7 +37,7 @@ spring:
         show_sql: true
         format_sql: true
   jackson:
-    date-format : yyyy-MM-dd HH:mm:ss
+    date-format : yyyy-MM-dd HH:mm:ss   #有特殊需要可以在实体类上的字段+ @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd") @DateTimeFormat(pattern="yyyy-MM-dd")
     time-zone : GMT+8
 #  devtools:  #添加那个目录的文件需要restart
 #    restart:
@@ -45,6 +45,8 @@ spring:
 
   session:
     store-type: none #如果使用redis存储session:spring.session.store-type=redis
+  cache:
+    type: REDIS
 
   redis:
     #################redis基础配置#################

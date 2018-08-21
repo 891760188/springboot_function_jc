@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ye.guo.huang.jwt.common.ResponseBean;
+import ye.guo.huang.jwt.common.cache.redis.RedisService;
 import ye.guo.huang.jwt.pojo.StringDateConvert;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *  redis 的测试   StringRedisTemplate  RedisService  RedisCacheInit-加载初始化数据进缓存
  * @author 448249687@qq.com
  * @Date 2018/8/4
  *
@@ -26,12 +27,15 @@ import java.util.concurrent.TimeUnit;
 @Api(value="reids的tringRedisTemplate使用",tags={"redies-apis"})
 @RestController
 @RequestMapping("/api/reids")
-public class StringRedisTemplateController {
+public class RedisController {
 
-    private static final Logger LOGGER = LogManager.getLogger(StringRedisTemplateController.class);
+    private static final Logger LOGGER = LogManager.getLogger(RedisController.class);
 
     @Autowired
     private StringRedisTemplate redisTemplate ;
+
+    @Autowired
+    private RedisService redisService ;
 
     //注入RedisTemplate对象
     @Autowired
@@ -66,6 +70,17 @@ public class StringRedisTemplateController {
         stringDateConvert = (StringDateConvert) objRedisTemplate.opsForValue().get("stringDateConvert");
         return new ResponseBean(stringDateConvert);
 
+    }
+
+    @GetMapping("/get.test")
+    public ResponseBean getInitData(){
+
+        return ResponseBean.response(redisService.get("user"));
+    }
+    @GetMapping("/get2.test")
+    public ResponseBean getInitData2(){
+
+        return ResponseBean.response(redisService.get("excels"));
     }
 
 }

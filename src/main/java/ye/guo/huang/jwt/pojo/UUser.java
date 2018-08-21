@@ -1,5 +1,7 @@
 package ye.guo.huang.jwt.pojo;
 
+import ye.guo.huang.jwt.common.util.JacksonUtil;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -26,6 +28,10 @@ public class UUser {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastLoginTime ;
 
+
+    public String toString(){
+        return JacksonUtil.toJson(this);
+    }
 
     public int getId() {
         return id;

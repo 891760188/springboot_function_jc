@@ -124,5 +124,10 @@ public class ExcelTestServiceImpl implements ExcelTestService {
         return "成功数="+ins + "   失败数="+errList.size() + errList.toString();
     }
 
+    @Override
+    public List<ExcelTest> selectByExcelTest(ExcelTest excelTest) {
+        return excelTestMapper.selectByExcelTest(excelTest);
+    }
+
 
 }

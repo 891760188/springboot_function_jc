@@ -1,5 +1,7 @@
 package ye.guo.huang.jwt.pojo;
 
+import ye.guo.huang.jwt.common.util.JacksonUtil;
+
 public class ExcelTest {
     private Integer id;
 
@@ -16,6 +18,9 @@ public class ExcelTest {
 
     }
 
+    public String toString(){
+        return JacksonUtil.toJson(this);
+    }
 
 
     public Integer getId() {

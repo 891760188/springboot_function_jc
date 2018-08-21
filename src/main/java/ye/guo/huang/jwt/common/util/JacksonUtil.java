@@ -10,6 +10,12 @@ import org.codehaus.jackson.type.JavaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *  json转化工具类
+ * @author 448249687@qq.com
+ * @Date 2018/8/20
+ *
+ */
 public class JacksonUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();

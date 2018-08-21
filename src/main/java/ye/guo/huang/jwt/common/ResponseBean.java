@@ -3,6 +3,7 @@ package ye.guo.huang.jwt.common;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ye.guo.huang.jwt.common.enums.HttpStatusEnum;
+import ye.guo.huang.jwt.common.util.JacksonUtil;
 
 /**
  *  回复前端数据类
@@ -41,6 +42,11 @@ public class ResponseBean {
         this.code = HttpStatusEnum.OK.code();
         this.data = data;
     }
+
+    public String toString(){
+        return JacksonUtil.toJson(this);
+    }
+
 
     public ResponseBean() {
         this.code = HttpStatusEnum.OK.code();
