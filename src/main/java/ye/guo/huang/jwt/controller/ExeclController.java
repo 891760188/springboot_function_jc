@@ -76,12 +76,12 @@ public class ExeclController {
             // mobile = memberCell.toString();
 
             switch (phoneCell.getCellType()) {
-                case HSSFCell.CELL_TYPE_NUMERIC:// 数字
-                    mobile = df.format(phoneCell.getNumericCellValue());
-                    break;
-                case HSSFCell.CELL_TYPE_STRING:// 字符串
-                    mobile = df.format(Double.parseDouble(phoneCell.toString()));
-                    break;
+//                case HSSFCell.CELL_TYPE_NUMERIC:// 数字
+//                    mobile = df.format(phoneCell.getNumericCellValue());
+//                    break;
+//                case HSSFCell.CELL_TYPE_STRING:// 字符串
+//                    mobile = df.format(Double.parseDouble(phoneCell.toString()));
+//                    break;
                 default:
                     mobile = phoneCell.toString();
                     break;

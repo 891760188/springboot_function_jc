@@ -5,6 +5,11 @@ logging: #日志的配置
   level:
     ye.guo.huang.jwt.mapper : DEBUG
 spring:
+  rabbitmq:
+    host : 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
