@@ -2,3 +2,5 @@
 spring:
   profiles:
     active: dev
+weixin:
+  host: https://api.weixin.qq.com/

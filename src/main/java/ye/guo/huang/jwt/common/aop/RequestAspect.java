@@ -46,17 +46,17 @@ public class RequestAspect {
         //请求返回的结果
         Object restResult = joinPoint.proceed();
 
-        long endTime = System.currentTimeMillis();
-        long duration = endTime - startTime;
-
-        StringBuilder restInfo = new StringBuilder(targetMethod.getDeclaringClass().getName() + ".");//请求的类名
-        restInfo.append(targetMethod.getName());//请求的控制层的方法名
-        restInfo.append("---请求参数targetArgs=(" + JacksonUtil.toJson(targetArgs) + ")");//请求参数
-        restInfo.append("---返回结果restResult=(" + JacksonUtil.toJson(restResult) + ")");//返回结果
-        restInfo.append(" 耗时 ：");
-        restInfo.append(duration);
-        restInfo.append("毫秒");
-        LOGGER.info(restInfo.toString());
+//        long endTime = System.currentTimeMillis();
+//        long duration = endTime - startTime;
+//
+//        StringBuilder restInfo = new StringBuilder(targetMethod.getDeclaringClass().getName() + ".");//请求的类名
+////        restInfo.append(targetMethod.getName());//请求的控制层的方法名
+////        restInfo.append("---请求参数targetArgs=(" + JacksonUtil.toJson(targetArgs) + ")");//请求参数
+//        restInfo.append("---返回结果restResult=(" + JacksonUtil.toJson(restResult) + ")");//返回结果
+//        restInfo.append(" 耗时 ：");
+//        restInfo.append(duration);
+//        restInfo.append("毫秒");
+//        LOGGER.info(restInfo.toString());
         return restResult;
     }
 

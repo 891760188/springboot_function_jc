@@ -1,0 +1,5 @@
+<root>
+    <item name='org.hibernate.id.UUIDHexGenerator java.io.Serializable generate(org.hibernate.engine.spi.SessionImplementor, java.lang.Object)'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

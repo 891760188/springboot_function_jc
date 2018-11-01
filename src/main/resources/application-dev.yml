@@ -87,5 +87,8 @@ pagehelper:
 
 constant:
   filepath : D:\09_software\50_intellj idea\Iprodect\spring-boot-chapter\jwt\files
+  nonceStr: 5K8264ILTKCH16CQ2502SI8ZNMTM67VS
+  appid: wxd0ad6e09b4f09a2awxd0ad6e09b4f09a2a
+  AppSecret: 919f06b91b6adbe682c0bd9edc0a008f
 
 
